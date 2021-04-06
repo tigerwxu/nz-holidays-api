@@ -1,3 +1,5 @@
+module.exports = { generateHolidayCalendar };
+
 /**
  * 
  * @param {number} year - The year to calculate Easter holidays for
@@ -19,9 +21,6 @@ function getEaster(year, calendar)
     let n = Math.trunc((h - m + l + 90) / 25);
     let p = (h - m + l + n + 19) % 32;
 
-    console.log(n);
-    console.log(p);
-
     let date = new Date(year, n - 1, p); // Easter Sunday
     // Easter Sunday is technically not a holiday in NZ!
     // calendar[date.getMonth() + 1][date.getDate()] = "Easter Sunday";
@@ -31,11 +30,10 @@ function getEaster(year, calendar)
     calendar[date.getMonth() + 1][date.getDate()] = "Easter Monday";
 }
 
-
 /**
  * 
- * @param {*} year 
- * @returns 
+ * @param {number} year - The year to calculate Queen's Birthday date for
+ * @param {Object} calendar - The calendar object to add the Queen's Birthday date to
  */
 function getQueensBirthday(year, calendar) {
     let d = new Date(year, 5);
@@ -47,6 +45,11 @@ function getQueensBirthday(year, calendar) {
     calendar[d.getMonth() + 1][d.getDate()] = "Queen's Birthday";
 }
 
+/**
+ * 
+ * @param {number} year - The year to calculate Labour Day date for
+ * @param {Object} calendar - The calendar object to add the Labour Day date to
+ */
 function getLabourDay(year, calendar) {
     let d = new Date(year, 9);
     
@@ -59,8 +62,12 @@ function getLabourDay(year, calendar) {
     calendar[d.getMonth() + 1][d.getDate()] = "Labour Day";
 }
 
+/**
+ * 
+ * @param {*} year - The year to generate a calendar of holidays for
+ * @returns - A calendar object representing the holidays of the year
+ */
 function generateHolidayCalendar(year) {
-
     let holidays = {
         1: {
             1: "New Year's Day",
@@ -92,6 +99,3 @@ function generateHolidayCalendar(year) {
 
     return holidays;
 }
-
-let holidays = generateHolidayCalendar(2022);
-console.log(holidays);
